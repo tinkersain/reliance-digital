@@ -1,0 +1,4 @@
+.main-slider {
+  display: flex;
+  flex-direction: column;
+}
