@@ -1,0 +1,34 @@
+.swipe-container {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  justify-content: center;
+  gap: 5%;
+}
+
+.swipe-container::-webkit-scrollbar {
+  display: none;
+}
+
+.swipe-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  flex-shrink: 0; /* Prevent items from shrinking */
+}
+
+.img-swipe {
+  width: auto;
+  height: auto;
+  max-width: 200px; /* Adjust based on desired maximum image size */
+  max-height: 200px; /* Adjust based on desired maximum image size */
+  margin-bottom: 5px;
+}
+
+.txt-swipe {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Handles text overflow */
+}

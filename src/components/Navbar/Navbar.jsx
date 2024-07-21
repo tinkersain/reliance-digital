@@ -12,25 +12,29 @@ import { IoPerson } from "react-icons/io5";
 import { FaAngleDown } from "react-icons/fa";
 import dropdownData from "./dropdownData";
 import "./Navbar.css";
+import useWindowWidth from "../useWindoWidth/useWindowWidth";
 
 function Navbar() {
   const [selected, setSelected] = useState("Mobiles & Tablets");
   const [toDisplay, setToDisplay] = useState(false);
+  const width = useWindowWidth();
   return (
     <>
       <div
         className="nav-main
     "
       >
-        <div className="upper-part">
-          <div className="child1">
-            <p>Find a Store</p>
-            <p>|</p>
-            <p>Buying Guides</p>
-            <p>|</p>
-            <p>Contact US</p>
+        {width > 800 && (
+          <div className="upper-part">
+            <div className="child1">
+              <p>Find a Store</p>
+              <p>|</p>
+              <p>Buying Guides</p>
+              <p>|</p>
+              <p>Contact US</p>
+            </div>
           </div>
-        </div>
+        )}
         <div className="lower-part">
           <div className="logo">
             <Image
@@ -73,33 +77,63 @@ function Navbar() {
         </div>
 
         <div className="navigations">
-          {Object.keys(dropdownData).map((item) => {
-            return (
-              <>
-                <div
-                  style={{
-                    display: "flex",
-                    padding: "0.5%",
-                  }}
-                  onMouseOver={() => {
-                    setSelected(item);
-                    setToDisplay(true);
-                  }}
-                  onMouseLeave={() => setToDisplay(false)}
-                >
-                  <div>{item}</div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column-reverse",
-                    }}
-                  >
-                    <FaAngleDown />
-                  </div>
-                </div>
-              </>
-            );
-          })}
+          {width > 1080
+            ? Object.keys(dropdownData).map((item) => {
+                return (
+                  <>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "0.5%",
+                      }}
+                      onMouseOver={() => {
+                        setSelected(item);
+                        setToDisplay(true);
+                      }}
+                      onMouseLeave={() => setToDisplay(false)}
+                    >
+                      <div>{item}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column-reverse",
+                        }}
+                      >
+                        <FaAngleDown />
+                      </div>
+                    </div>
+                  </>
+                );
+              })
+            : Object.keys(dropdownData)
+                .slice(0, 5)
+                .map((item) => {
+                  return (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "0.5%",
+                        }}
+                        onMouseOver={() => {
+                          setSelected(item);
+                          setToDisplay(true);
+                        }}
+                        onMouseLeave={() => setToDisplay(false)}
+                      >
+                        <div>{item}</div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column-reverse",
+                          }}
+                        >
+                          <FaAngleDown />
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
         </div>
       </div>
       {toDisplay && (
