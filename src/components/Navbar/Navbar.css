@@ -1,0 +1,92 @@
+.nav-main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.upper-part {
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  background: #e42529;
+}
+.lower-part {
+  padding-left: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  background: #e42529;
+  color: white;
+}
+.parent-option {
+  display: flex;
+  flex-direction: column;
+}
+
+.child1 {
+  display: flex;
+}
+
+.child1 p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.child2 {
+  display: flex;
+}
+
+.child2 p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.search {
+  width: 35%;
+}
+
+.navigations {
+  display: flex;
+  justify-content: space-evenly;
+  background: #003380;
+  color: white;
+  font-weight: 400;
+}
+
+.dropdown {
+  position: absolute; /* Initially positioned above the screen */
+  width: 96%;
+  top: 7.45rem;
+  background-color: #003380;
+  color: black;
+  padding: 20px;
+  transition: 0.3s ease;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  color: white;
+  font-size: medium;
+}
+
+.parent-dropdown {
+  display: flex;
+  justify-content: center;
+}
+
+.drop-up {
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-up > div {
+  padding-top: 2%;
+}
+
+.navigations > div:hover {
+  cursor: pointer;
+  background: #e42529;
+}
