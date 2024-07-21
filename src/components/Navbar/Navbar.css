@@ -60,8 +60,8 @@
 .dropdown {
   position: absolute; /* Initially positioned above the screen */
   width: 96%;
-  top: 7.45rem;
-  background-color: #003380;
+  top: 7.2rem;
+  background-color: #252f64;
   color: black;
   padding: 20px;
   transition: 0.3s ease;
