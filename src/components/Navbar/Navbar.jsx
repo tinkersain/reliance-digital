@@ -107,7 +107,7 @@ function Navbar() {
                   <p>|</p>
                   <p style={{ display: "flex", alignItems: "center" }}>
                     <IoPerson style={{ fontSize: "x-large" }} />
-                    <p>Hi Aditya</p>
+                    <p>Hi Tanisha</p>
                   </p>
                 </div>
               </div>
