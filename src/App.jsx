@@ -8,8 +8,8 @@ import Navbar from "./components/Navbar/Navbar";
 export default function App() {
   return (
     <>
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/product" element={<ProductDisplay />} />
