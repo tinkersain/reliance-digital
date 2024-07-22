@@ -35,12 +35,20 @@ const PriceRange = () => {
                 <RangeSliderTrack>
                   <RangeSliderFilledTrack background={"#003380"} />
                 </RangeSliderTrack>
-                <RangeSliderThumb index={0} backgroundColor="#e42529" />
-                <RangeSliderThumb index={1} backgroundColor="#e42529" />
+                <RangeSliderThumb
+                  index={0}
+                  backgroundColor="#000000"
+                  border="0.1px solid aqua"
+                />
+                <RangeSliderThumb
+                  index={1}
+                  backgroundColor="#000000"
+                  border="0.1px solid aqua"
+                />
               </RangeSlider>
               <Flex justifyContent={"space-between"} width="95%" m="auto">
-                <Text>₹499</Text>
-                <Text>₹46999</Text>
+                <Text>₹399</Text>
+                <Text>₹64999</Text>
               </Flex>
               <br />
               <Flex
@@ -50,13 +58,22 @@ const PriceRange = () => {
                 m="auto"
                 alignItems={"center"}
               >
-                <Input borderColor={"blue"} placeholder="499" />
+                <Input
+                  borderColor={"blue"}
+                  placeholder="399"
+                  borderRadius={0}
+                />
                 <Text>To</Text>
-                <Input borderColor={"blue"} placeholder="9999" />{" "}
+                <Input
+                  borderColor={"blue"}
+                  placeholder="64999"
+                  borderRadius={0}
+                />{" "}
                 <Button
                   background={"#003380"}
                   color={"white"}
                   colorScheme="none"
+                  borderRadius={0}
                 >
                   GO
                 </Button>

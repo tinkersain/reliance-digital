@@ -476,7 +476,11 @@ function Navbar() {
                         }}
                         onMouseLeave={() => setToDisplay(false)}
                       >
-                        <div>{item}</div>
+                        <div>
+                          <Link to={"/product"} state={item}>
+                            {item}
+                          </Link>
+                        </div>
                         <div
                           style={{
                             display: "flex",
@@ -494,27 +498,29 @@ function Navbar() {
                   .map((item) => {
                     return (
                       <>
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "0.5%",
-                          }}
-                          onMouseOver={() => {
-                            setSelected(item);
-                            setToDisplay(true);
-                          }}
-                          onMouseLeave={() => setToDisplay(false)}
-                        >
-                          <div>{item}</div>
+                        <Link to={"/product"}>
                           <div
                             style={{
                               display: "flex",
-                              flexDirection: "column-reverse",
+                              padding: "0.5%",
                             }}
+                            onMouseOver={() => {
+                              setSelected(item);
+                              setToDisplay(true);
+                            }}
+                            onMouseLeave={() => setToDisplay(false)}
                           >
-                            <FaAngleDown />
+                            <div>{item}</div>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column-reverse",
+                              }}
+                            >
+                              <FaAngleDown />
+                            </div>
                           </div>
-                        </div>
+                        </Link>
                       </>
                     );
                   })}

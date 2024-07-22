@@ -14,14 +14,35 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { BsHeart } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { mobiledata } from "../../assets/data/mobilesAndTablets";
-import AboveCarousel from "./AboveCarousel";
+
 import Filters from "../../components/Filters/Filters";
 import { computersdata } from "../../assets/data/computers";
+import { accessoriesdata } from "../../assets/data/accessories";
+import { allproductdata } from "../../assets/data/allproduct";
+import { camerasdata } from "../../assets/data/cameras";
+import { headphonesdata } from "../../assets/data/headphones";
+import { homeAppliancesdata } from "../../assets/data/homeAppliances";
+import { kitchendata } from "../../assets/data/kitchen";
+import { personaldata } from "../../assets/data/personalcare";
+import { televisondata } from "../../assets/data/televison";
+
+const displayData = {
+  "Mobiles & Tablets": mobiledata,
+  Televisions: televisondata,
+  Audio: headphonesdata,
+  "Home Appliances": homeAppliancesdata,
+  Computers: computersdata,
+  Cameras: camerasdata,
+  "Kitchen Appliances": kitchendata,
+  "Personal Care": personaldata,
+  Accessories: accessoriesdata,
+};
 
 const ProductDisplay = () => {
-  const data = computersdata;
+  const location = useLocation();
+  const data = displayData[location.state];
   const [skeletonLoading, setSkeletonLoading] = useState(false);
 
   const sortByLH = () => {
@@ -37,9 +58,9 @@ const ProductDisplay = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "20px" }}>
+      {/* <div style={{ marginBottom: "20px" }}>
         <AboveCarousel />
-      </div>
+      </div> */}
 
       <div></div>
       <div style={{ display: "flex", justifyContent: "space-around" }}>

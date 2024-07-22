@@ -1,4 +1,4 @@
-[
+export const personaldata = [
   {
     name: "BPL Men's 10-in-1 Grooming Kit with Digital Battery Indicator, 70mins Cordless Usage, Fast Charging, 5-Heads & 5-Comb Length Adjustment, Detachable Heads for easy cleaning, 2 Years Warranty, Black and Light Gold",
     img: "https://www.reliancedigital.in/medias/BPL-BBTD001GK-Shaver-and-Trimmers-491903184-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0Mjc2M3xpbWFnZS9qcGVnfGltYWdlcy9oZGEvaDUwLzk2MjExMzQwMTY1NDIuanBnfDU4YWM2ZDBiZDQwNjM5ZjEwMzQ0ZjEyMTU0OWZmM2MzOWUzZDVlZmI0NDUwYTU1YTdlYzIxMzRjYmRmMmQwOGE",
