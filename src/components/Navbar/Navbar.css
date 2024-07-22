@@ -14,6 +14,7 @@
 }
 .lower-part {
   padding-left: 2%;
+  padding-bottom: 1%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,4 +90,36 @@
 .navigations > div:hover {
   cursor: pointer;
   background: #e42529;
+}
+
+@media (max-width: 800px) {
+  .lower-part-mobile {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: bold;
+    background: #e42529;
+    color: white;
+  }
+  .contain-lower {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    padding-bottom: 1%;
+    padding-top: 1%;
+  }
+  .top-lower {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bottom-lower {
+    display: flex;
+    padding-bottom: 1%;
+    padding-left: 5%;
+  }
 }
