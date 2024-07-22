@@ -1,0 +1,41 @@
+export const accessoriesdata = [
+  {
+    name: "Neopack Unimount Tablet/Mobile Stand for 11.93 cm (4.7 inch) to 32.76 cm (12.9 inch) Screen Cell Phones and Tablets ,USTWH",
+    img: "https://www.reliancedigital.in/medias/Neopack-USTWH-Mounts-and-Stands-491946424-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w2NzcxN3xpbWFnZS9qcGVnfGltYWdlcy9oZjcvaDM4Lzk1Mjk1OTQ2NDI0NjIuanBnfGMwNmRiZGU0YjE4NTc4MmM0ZmUyZThmYjRlMjlhYWI2N2VhMzEyOWJhMzRkMzY2Zjg0ZDViOGZkNmQxNGI0NDg",
+    price: "2,199.00",
+    mrp: "2,999.00",
+    id: 20,
+    brand: "HP",
+  },
+  {
+    name: "Belkin F8M890BT04-BLK 17 Watts Mobile Car Charger with Coiled Micro USB Cable",
+    img: "https://www.reliancedigital.in/medias/Belkin-F8M890BT04-Chargers-and-Adapters-491378291-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w1MjUwM3xpbWFnZS9qcGVnfGltYWdlcy9oZmQvaGM2Lzg5NTIxNDE3MDkzNDIuanBnfDEyZjNkYjU1ZTVlMGMxNTNiZDY5ZDdjZGYxZmRkYTVlYjg5YzE1ODNiZTE0NmRkYWU1OTU0Zjg4MTJjNWZjYzc",
+    price: "999.00",
+    mrp: "1,999.00",
+    id: 21,
+    brand: "HP",
+  },
+  {
+    name: "Portronics Adapto 62 2.4 Amp Travel Adaptor",
+    img: "https://www.reliancedigital.in/medias/Portronics-POR-1062-Mobile-Chargers-Adapters-493177244-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3wyNjkzM3xpbWFnZS9qcGVnfGltYWdlcy9oMTMvaGYxLzk4NzA2MTQwMzY1MTAuanBnfGVhOTU0MmJmMDg3NzQ5YTFkYTNkNDJjYzI3MjYyNzg0NzY4ZTZkM2JhOWY1YzUwMGQ2MWY2OGU4ZDU1YzBiYzg",
+    price: "399.00",
+    id: 22,
+    brand: "HP",
+  },
+  {
+    name: "CyberPower CPSAC2A2UEU 2.1 Amps Quick Charging Dual Port Wall Adapter with Built-In Overload and Overheat protection",
+    img: "https://www.reliancedigital.in/medias/Cyber-CPSAC2A2UEU-Chargers-Adapters-491229228-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0NDc1MHxpbWFnZS9qcGVnfGltYWdlcy9oNTMvaGVhLzg5MjA5Mzg0MTQxMTAuanBnfDIwOGVhOTkzOTk5ZjQxNGI5ZTdkMTMxNGUwNGY4NWYwNzhmODE3MWY0NjZhZDE5ZGViYTYwZDI2Y2NkMWE2YjY",
+    price: "599.00",
+    mrp: "999.00",
+    id: 23,
+    brand: "HP",
+  },
+  {
+    name: "Cyber Power CPSAC1A2UEU Dual Port Wall Adapter Built-In Overload and Overheat Protection",
+    img: "https://www.reliancedigital.in/medias/Cyber-CPSAC1A2UEU-Chargers-Adapters-491229227-i-1-1200Wx1200H-300Wx300H?context=bWFzdGVyfGltYWdlc3w0NDgwMnxpbWFnZS9qcGVnfGltYWdlcy9oMTcvaDE4Lzg5MjA5MzkzOTcxNTAuanBnfDE5Mzg1YWQ5NTI2ZTRlYzRjY2Y0Y2I5YWUxZDZlZmZhZDc4M2E0YzQ5OTYyZGZlMzE0ZDUxYTFhYTg5MWM5NmI",
+    price: "599.00",
+    mrp: "949.00",
+    id: 24,
+    brand: "HP",
+  },
+];
