@@ -4,11 +4,12 @@ import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./Homepage.css";
+import useWindowWidth from "../../components/useWindoWidth/useWindowWidth";
 
 const NextCarousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const itemsPerSlide = useBreakpointValue({ base: 2, sm: 3, md: 4, lg: 5 });
+  const itemsPerSlide = useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 });
   const totalSlides = Math.ceil(items.length / itemsPerSlide);
 
   const handlePrev = () => {
@@ -49,6 +50,8 @@ const NextCarousel = ({ items }) => {
     return null;
   }
 
+  const width = useWindowWidth();
+
   return (
     <Box
       position="relative"
@@ -83,19 +86,21 @@ const NextCarousel = ({ items }) => {
                 width={`${100 / itemsPerSlide}%`}
               >
                 <div className="card-body" key={item.id}>
-                  <div className="card-teaser">
-                    <p>
-                      <span
-                        style={{
-                          background: `${
-                            item.teaserType.length !== 0 ? "#007fad" : ""
-                          }`,
-                        }}
-                      >
-                        {item.teaserType.substr(0, 35)}
-                      </span>
-                    </p>
-                  </div>
+                  {width > 1000 && (
+                    <div className="card-teaser">
+                      <p>
+                        <span
+                          style={{
+                            background: `${
+                              item.teaserType.length !== 0 ? "#007fad" : ""
+                            }`,
+                          }}
+                        >
+                          {item.teaserType.substr(0, 35)}
+                        </span>
+                      </p>
+                    </div>
+                  )}
                   <div
                     className="card-img"
                     style={{

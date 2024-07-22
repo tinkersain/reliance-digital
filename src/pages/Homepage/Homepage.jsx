@@ -17,9 +17,10 @@ function Homepage() {
 
   return (
     <>
-      <Navbar />
+      {/*Section - 1*/}
       <Mainslider />
 
+      {/*Section - 2*/}
       <div className="tel-carousel">
         <div className="header-tel">
           <p>
@@ -40,9 +41,9 @@ function Homepage() {
         </div>
         <NextCarousel items={television} />
       </div>
-
       <Divider paddingTop="2%" paddingBottom={"2%"} />
 
+      {/*Section - 3*/}
       <div className="tel-carousel">
         <div className="header-tel">
           <p>Best Selling Audio Accessories</p>
@@ -60,9 +61,9 @@ function Homepage() {
         </div>
         <NextCarousel items={earphones} />
       </div>
-
       <Divider paddingTop="2%" paddingBottom={"2%"} />
 
+      {/*Section - 4*/}
       <div className="tel-carousel">
         <div className="header-tel">
           <p>Splash Into Savings | 45% Off Water Purifiers!</p>
@@ -80,9 +81,9 @@ function Homepage() {
         </div>
         <NextCarousel items={waterPurifers} />
       </div>
-
-      {/* <CarouselRevamped items={banners} /> */}
       <Divider paddingTop="2%" paddingBottom={"2%"} />
+
+      {/*Section - 5*/}
       <ProductSwipe items={Explore1} />
     </>
   );
