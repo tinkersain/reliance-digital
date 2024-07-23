@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+  background,
+} from "@chakra-ui/react";
+
+import {
   Button,
   Image,
   Input,
@@ -95,6 +107,31 @@ function Navbar() {
             <div className="options">
               <div className="parent-option">
                 <div className="child2">
+<<<<<<< HEAD
+                  <p style={{ display: "flex", alignItems: "center" }}>
+                    <Menu>
+                      <MenuButton>Select your Pincode</MenuButton>
+                      <MenuList>
+                        <MenuItem>Choose your delivery location</MenuItem>
+                        <MenuItem>
+                          <Input
+                            placeholder="Enter Delivery Pincode"
+                            type="search"
+                            variant={"none"}
+                            borderRadius="20px"
+                            paddingLeft={"20px"}
+                            color={"black"}
+                          />
+                        </MenuItem>
+                        <MenuItem as="a" href="#">
+                          Detect My Location
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </p>
+                  <p>|</p>
+                  <p style={{ display: "flex", alignItems: "center" }}>
+=======
                   <p>Select your Pin Code</p>
                   <p
                     style={{
@@ -103,6 +140,7 @@ function Navbar() {
                       borderLeft: "1px solid white",
                     }}
                   >
+>>>>>>> ca8b74f50235169badfd0074e6e1ff8005931a3e
                     <IoCart style={{ fontSize: "x-large" }} />
                     <p>Cart</p>
                   </p>
