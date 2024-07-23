@@ -107,7 +107,9 @@ function Navbar() {
                   <p>|</p>
                   <p style={{ display: "flex", alignItems: "center" }}>
                     <IoPerson style={{ fontSize: "x-large" }} />
-                    <p>Hi Tanisha</p>
+                    <Link to="/login">
+                      <button className="login-button">Login</button>
+                    </Link>
                   </p>
                 </div>
               </div>
