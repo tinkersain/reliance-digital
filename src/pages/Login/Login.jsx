@@ -14,7 +14,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <img
-        src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"
+        src="src/assets/LoginWebBanner.avif"
         alt="Ad Banner"
         className="ad-banner"
       />
