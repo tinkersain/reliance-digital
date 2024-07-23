@@ -42,6 +42,7 @@ const displayData = {
 
 const ProductDisplay = () => {
   const location = useLocation();
+  console.log(location.state);
   const data = displayData[location.state];
   const [skeletonLoading, setSkeletonLoading] = useState(false);
 

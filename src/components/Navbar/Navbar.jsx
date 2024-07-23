@@ -480,7 +480,7 @@ function Navbar() {
                           display: "flex",
                           padding: "0.5%",
                         }}
-                        onMouseOver={() => {
+                        onMouseEnter={() => {
                           setSelected(item);
                           setToDisplay(true);
                         }}
@@ -504,7 +504,7 @@ function Navbar() {
                   );
                 })
               : Object.keys(dropdownData)
-                  .slice(0, 5)
+                  .filter((_, index) => [1, 2, 4, 5, 8].includes(index))
                   .map((item) => {
                     return (
                       <>

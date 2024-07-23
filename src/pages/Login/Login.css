@@ -35,7 +35,7 @@
 }
 
 .login-box form {
-  padding: 20px;
+  padding: 30px;
   height: 25vh;
 }
 
@@ -53,7 +53,7 @@
 .login-button {
   width: 100%;
   padding: 10px;
-  background-color: #ff0000;
+  background-color: #e42529;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -89,7 +89,7 @@
 .proceed-button {
   width: 100%;
   padding: 10px;
-  background-color: #ff0000;
+  background-color: #e42529;
   color: white;
   border: none;
   border-radius: 4px;
