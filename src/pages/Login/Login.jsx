@@ -13,11 +13,12 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <img
-        src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"
-        alt="Ad Banner"
-        className="ad-banner"
-      />
+      <div className="img-ad-container">
+        <img
+          src="https://www.reliancedigital.in/akamai/images/web/LoginWebBanner.jpeg"
+          alt="Ad Banner"
+        />
+      </div>
       <div className="login-box">
         <h2>Login / Register</h2>
         <form onSubmit={handleSubmit}>
@@ -30,9 +31,11 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">
-            PROCEED
-          </button>
+          <div className="button-container">
+            <button type="submit" className="login-button">
+              PROCEED
+            </button>
+          </div>
         </form>
       </div>
     </div>

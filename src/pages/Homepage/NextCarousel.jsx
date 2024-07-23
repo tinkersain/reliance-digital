@@ -17,17 +17,7 @@ const NextCarousel = ({ items }) => {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => {
-      const nextIndex = prev + 1;
-      if (nextIndex >= totalSlides) {
-        return 0;
-      }
-      const remainingItems = items.length - nextIndex * itemsPerSlide;
-      if (remainingItems < itemsPerSlide) {
-        return Math.ceil(items.length / itemsPerSlide) - 1;
-      }
-      return nextIndex;
-    });
+    setCurrentIndex((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
   };
 
   const swipeHandlers = useSwipeable({
@@ -75,9 +65,7 @@ const NextCarousel = ({ items }) => {
         <Box flex="1" overflow="hidden" position="relative">
           <Flex
             transition="transform 0.5s"
-            transform={`translateX(-${
-              (currentIndex * itemsPerSlide * 100) / items.length
-            }%)`}
+            transform={`translateX(-${(currentIndex * 100) / itemsPerSlide}%)`}
           >
             {items.map((item, index) => (
               <Box
