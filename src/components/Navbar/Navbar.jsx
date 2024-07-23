@@ -27,6 +27,7 @@ import {
   Flex,
   Text,
   useDisclosure,
+  Divider,
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
@@ -73,10 +74,8 @@ function Navbar() {
           <div className="upper-part">
             <div className="child1">
               <p>Find a Store</p>
-              <p>|</p>
-              <p>Buying Guides</p>
-              <p>|</p>
-              <p>Contact US</p>
+              <p style={{ borderLeft: "1px solid white" }}>Buying Guides</p>
+              <p style={{ borderLeft: "1px solid white" }}>Contact us</p>
             </div>
           </div>
         )}
@@ -108,6 +107,7 @@ function Navbar() {
             <div className="options">
               <div className="parent-option">
                 <div className="child2">
+<<<<<<< HEAD
                   <p style={{ display: "flex", alignItems: "center" }}>
                     <Menu>
                       <MenuButton>Select your Pincode</MenuButton>
@@ -131,16 +131,32 @@ function Navbar() {
                   </p>
                   <p>|</p>
                   <p style={{ display: "flex", alignItems: "center" }}>
+=======
+                  <p>Select your Pin Code</p>
+                  <p
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      borderLeft: "1px solid white",
+                    }}
+                  >
+>>>>>>> ca8b74f50235169badfd0074e6e1ff8005931a3e
                     <IoCart style={{ fontSize: "x-large" }} />
                     <p>Cart</p>
                   </p>
-                  <p>|</p>
-                  <p style={{ display: "flex", alignItems: "center" }}>
-                    <IoPerson style={{ fontSize: "x-large" }} />
-                    <Link to="/login">
-                      <button className="login-button">Login</button>
-                    </Link>
-                  </p>
+                  <Link to="/login">
+                    <p
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        borderLeft: "1px solid white",
+                      }}
+                    >
+                      <IoPerson style={{ fontSize: "x-large" }} />
+
+                      <p>Login</p>
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .upper-part {
@@ -11,10 +14,12 @@
   justify-content: flex-end;
   color: white;
   background: #e42529;
+  padding-top: 0.5%;
 }
 .lower-part {
   padding-left: 2%;
   padding-bottom: 1%;
+  padding-top: 0.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,6 +44,7 @@
 
 .child2 {
   display: flex;
+  align-items: center;
 }
 
 .child2 p {
