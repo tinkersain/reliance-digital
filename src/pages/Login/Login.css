@@ -10,10 +10,13 @@
   flex: 2;
 }
 
-.img-ad-container img {
+.ad-banner img {
+  max-width: 50%;
   height: auto;
   vertical-align: baseline;
-  max-width: 100%;
+  max-height: none;
+  width: 100%;
+  height: auto;
 }
 
 .login-box {
@@ -70,7 +73,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 50%;
+  max-width: 400px;
   margin: 0 auto;
 }
 
