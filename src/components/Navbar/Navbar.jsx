@@ -77,7 +77,7 @@ function Navbar() {
 
   useEffect(() => {
     setLoggedUser(localStorage.getItem("logged_user"));
-  }, [trigger, location.state]);
+  }, [trigger, location]);
 
   const handleSignout = () => {
     localStorage.removeItem("logged_user");

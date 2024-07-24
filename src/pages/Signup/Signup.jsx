@@ -62,11 +62,11 @@ const Signup = () => {
             duration: 3000,
             isClosable: true,
           });
-          navigate("/");
+          navigate("/", { state: true });
           localStorage.setItem("logged_user", name);
         } else {
           const existingUser = allUsers.find((user) => user.email === email);
-          if (user) {
+          if (existingUser) {
             toast({
               title: "User Already Exist",
               description: "Please Proceed to Login",
