@@ -49,6 +49,7 @@ import {
   MdAccountCircle,
   MdComputer,
   MdLocationOn,
+  MdMyLocation,
   MdOutlineSms,
 } from "react-icons/md";
 import { RiComputerLine } from "react-icons/ri";
@@ -144,22 +145,30 @@ function Navbar() {
                       >
                         Select your Pincode
                       </MenuButton>
-                      {/* <MenuList>
-                        <h1 style={{color:"black"}}>Choose Your Delivery Location</h1>
-                        <MenuItem>
+                      <MenuList background={"#e42929"}>
+                        <h1 style={{ padding: "2% " }}>
+                          Choose Your Delivery Location
+                        </h1>
+                        <MenuItem background={"#003380"}>
                           <Input
                             placeholder="Enter Delivery Pincode"
                             type="search"
                             variant={"none"}
-                            borderRadius="20px"
                             paddingLeft={"20px"}
                             color={"black"}
                           />
                         </MenuItem>
-                        <MenuItem as="a" href="#">
-                          Detect My Location
-                        </MenuItem>
-                      </MenuList> */}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            paddingLeft: "2%",
+                          }}
+                        >
+                          <MdMyLocation style={{ fontSize: "large" }} />
+                          <h1 style={{ padding: "2%" }}>Detect My Location</h1>
+                        </div>
+                      </MenuList>
                     </Menu>
                   </p>
                   <p>|</p>

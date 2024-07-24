@@ -5,8 +5,9 @@ import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./Homepage.css";
 import useWindowWidth from "../../components/useWindoWidth/useWindowWidth";
+import { useNavigate } from "react-router-dom";
 
-const NextCarousel = ({ items }) => {
+const NextCarousel = ({ items, link }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const itemsPerSlide = useBreakpointValue({ base: 1, sm: 2, md: 3, lg: 4 });
@@ -41,6 +42,7 @@ const NextCarousel = ({ items }) => {
   }
 
   const width = useWindowWidth();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -66,6 +68,9 @@ const NextCarousel = ({ items }) => {
           <Flex
             transition="transform 0.5s"
             transform={`translateX(-${(currentIndex * 100) / itemsPerSlide}%)`}
+            onClick={() => {
+              navigate("/product", { state: link });
+            }}
           >
             {items.map((item, index) => (
               <Box

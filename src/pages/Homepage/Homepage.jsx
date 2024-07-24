@@ -39,7 +39,7 @@ function Homepage() {
             View All
           </Button>
         </div>
-        <NextCarousel items={television} />
+        <NextCarousel items={television} link={"Televisions"} />
       </div>
       <Divider paddingTop="2%" paddingBottom={"2%"} />
 
@@ -59,7 +59,7 @@ function Homepage() {
             View All
           </Button>
         </div>
-        <NextCarousel items={earphones} />
+        <NextCarousel items={earphones} link={"Audio"} />
       </div>
       <Divider paddingTop="2%" paddingBottom={"2%"} />
 
@@ -79,7 +79,7 @@ function Homepage() {
             View All
           </Button>
         </div>
-        <NextCarousel items={waterPurifers} />
+        <NextCarousel items={waterPurifers} link={"Kitchen Appliances"} />
       </div>
       <Divider paddingTop="2%" paddingBottom={"2%"} />
 
