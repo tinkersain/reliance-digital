@@ -1,0 +1,247 @@
+/*-----------Cart Item CSS-----------------*/
+.cart-info-box {
+  border-radius: 4px;
+  background-color: white;
+  overflow: hidden;
+  margin: 0;
+  margin: 10px 0;
+  padding: 4px 10px 0 10px;
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.product-box {
+  display: flex;
+  border: 0;
+  padding: 10px;
+}
+
+.cart-image {
+  width: 80%;
+}
+
+.product-box > div:nth-child(1) {
+  flex: 1;
+}
+.product-box > div:nth-child(2) {
+  flex: 3;
+  padding: 0 10px;
+}
+.product-box > div:nth-child(3) {
+  flex: 2;
+  text-align: end;
+}
+
+.product-box h3 {
+  font-size: medium;
+  font-weight: 400;
+  color: rgb(0, 0, 126);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 10px 0;
+}
+
+.product-box h2 {
+  font-size: medium;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+}
+
+.product-box h5 > span {
+  font-size: x-small;
+  color: rgb(229, 45, 49);
+}
+
+.product-box h5 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.add-logo {
+  color: black;
+  background-color: yellow;
+  border-radius: 90px;
+  padding: 4px;
+}
+
+#price-section {
+  display: grid;
+  gap: 6px;
+}
+
+#price-strike {
+  font-size: small;
+  color: rgb(89, 122, 122);
+}
+#price-strike > span {
+  font-size: x-small;
+}
+
+#cart-shipping {
+  font-size: 14px;
+  color: rgb(27, 146, 146);
+}
+
+#cart-delivery {
+  display: flex;
+  align-items: center;
+  font-size: small;
+  text-align: end;
+  color: rgb(58, 58, 183);
+  justify-content: flex-end;
+}
+
+#govt-assurance {
+  font-size: 10px;
+  color: rgb(27, 146, 146);
+}
+
+.cart-buttons {
+  display: flex;
+  width: 100%;
+  margin: 0 auto 0 auto;
+}
+.cart-buttons > button:nth-child(1) {
+  flex: 1;
+  padding: 10px;
+  margin: 0;
+  background-color: white;
+  border-radius: 0;
+  border: 1px solid rgb(194, 194, 194);
+  cursor: pointer;
+  color: blue;
+  border-bottom-left-radius: 4px;
+}
+.cart-buttons > button:nth-child(2) {
+  flex: 1;
+  border-radius: 0;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgb(194, 194, 194);
+  background-color: white;
+  cursor: pointer;
+  color: blue;
+  border-bottom-right-radius: 4px;
+}
+
+/*-----------Cart Main Division Css-------------*/
+
+.cart-container {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 30px auto;
+  background-color: unset;
+  gap: 30px;
+}
+
+.cart-container > div:nth-child(1) {
+  flex: 7;
+}
+.cart-container > div:nth-child(2) {
+  flex: 3;
+}
+
+.payment-checkout {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.payment-checkout h4 {
+  font-size: medium;
+  font-weight: 400;
+}
+
+#checkout-btn {
+  width: 100%;
+  background: #e42929;
+  color: white;
+  padding: 8px;
+  border-radius: 3px;
+  border: 0;
+}
+
+.amount {
+  margin-top: 20px;
+  padding: 16px 14px;
+  display: grid;
+  gap: 8px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.amount hr {
+  border-radius: 20px;
+  border: 1px solid rgba(160, 160, 160, 0.4);
+}
+
+.amount > hr {
+  margin: 8px 0;
+}
+
+#coupon {
+  display: flex;
+  width: 100%;
+}
+
+#coupon > input {
+  width: 70%;
+  padding: 6px 18px;
+  border: 1px solid rgb(199, 199, 199);
+  border-right: 1px solid blue;
+  outline: 0;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 3px;
+}
+
+#coupon > button {
+  width: 30%;
+  padding: 6px 10px;
+  border: 1px solid rgb(199, 199, 199);
+  color: white;
+  background: #003380;
+  font-weight: 500;
+  border-top-left-radius: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 0;
+}
+
+#price-final {
+  margin: 0 0 10px 0;
+}
+
+#price-final > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+
+#price-final h4 {
+  font-size: small;
+  color: teal;
+}
+
+.payment h5 {
+  font-family: "Montserrat", sans-serif;
+  color: rgb(105, 105, 105);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 980px) {
+  .cart-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .payment-checkout {
+    flex-direction: column-reverse;
+  }
+}

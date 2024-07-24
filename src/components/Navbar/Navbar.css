@@ -16,6 +16,7 @@
   background: #e42529;
   padding-top: 0.5%;
 }
+
 .lower-part {
   padding-left: 2%;
   padding-bottom: 1%;
@@ -28,6 +29,7 @@
   background: #e42529;
   color: white;
 }
+
 .parent-option {
   display: flex;
   flex-direction: column;
@@ -65,8 +67,8 @@
 }
 
 .dropdown {
-  position: absolute; /* Initially positioned above the screen */
-  width: 96%;
+  position: absolute;
+  width: 97%;
   top: 8.4rem;
   background-color: #252f64;
   color: black;
@@ -83,6 +85,7 @@
 .parent-dropdown {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .drop-up {
@@ -90,8 +93,13 @@
   flex-direction: column;
 }
 
-.drop-up > div {
-  padding-top: 2%;
+.drop-up > a {
+  padding-top: 4%;
+  cursor: pointer;
+}
+
+.drop-up > a:hover {
+  color: #e42929;
 }
 
 .navigations > div:hover {
@@ -117,6 +125,10 @@
   .logo {
     padding-bottom: 1%;
     padding-top: 1%;
+  }
+
+  .logo:hover {
+    cursor: pointer;
   }
   .top-lower {
     display: flex;
