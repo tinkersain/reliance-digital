@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./ProductDisplay.css";
@@ -12,9 +12,10 @@ import {
   Stack,
   Image,
   Badge,
+  useToast,
 } from "@chakra-ui/react";
 import { BsHeart } from "react-icons/bs";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { mobiledata } from "../../assets/data/mobilesAndTablets";
 
 import Filters from "../../components/Filters/Filters";
@@ -42,19 +43,19 @@ const displayData = {
 
 const ProductDisplay = () => {
   const location = useLocation();
-  const data = displayData[location.state];
+
+  if (!location.state) {
+    return <Navigate to={"/"} />;
+  }
+
+  const [data, setData] = useState(displayData[location.state]);
   const [skeletonLoading, setSkeletonLoading] = useState(false);
 
-  const sortByLH = () => {
-    console.log("LH", data);
-    return data.sort((a, b) => b.name.localeCompare(a.name));
-  };
+  useEffect(() => {
+    setData(displayData[location.state]);
+  }, [location]);
 
-  const sortByHL = () => {
-    console.log("HL", data);
-
-    return data.sort((a, b) => a.name.localeCompare(b.name));
-  };
+  const toast = useToast();
 
   return (
     <>
@@ -97,18 +98,14 @@ const ProductDisplay = () => {
                   fontFamily: "sans-serif",
                 }}
               >
-                Camera
+                {location.state}
               </h1>
               <span>(Showing 1-{data.length} results of total Products )</span>
             </div>
             <div id="sortButtonContainer">
               <b> Sort By :</b> <button id="sortingButton">Relevance</button>
-              <button onClick={sortByLH} id="sortingButton">
-                Low to High
-              </button>
-              <button onClick={sortByHL} id="sortingButton">
-                High to Low
-              </button>
+              <button id="sortingButton">Low to High</button>
+              <button id="sortingButton">High to Low</button>
             </div>
           </div>
 
@@ -298,7 +295,7 @@ const ProductDisplay = () => {
           ) : (
             <div id="productCards">
               {data.map((product) => (
-                <Link to={`cameras/${product.id}`}>
+                <Link to={"/productDetails"} state={product}>
                   <Card
                     variant="outline"
                     key={product.id}

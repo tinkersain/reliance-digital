@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Menu,
   MenuButton,
@@ -9,6 +9,7 @@ import {
   MenuOptionGroup,
   MenuDivider,
   background,
+  useToast,
 } from "@chakra-ui/react";
 
 import {
@@ -57,13 +58,37 @@ import { FaAngleDown } from "react-icons/fa";
 import dropdownData from "./dropdownData";
 import "./Navbar.css";
 import useWindowWidth from "../useWindoWidth/useWindowWidth";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [loggedUser, setLoggedUser] = useState(
+    localStorage.getItem("logged_user")
+  );
   const [selected, setSelected] = useState("Mobiles & Tablets");
   const [toDisplay, setToDisplay] = useState(false);
   const width = useWindowWidth();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [trigger, setTrigger] = useState(false);
+
+  const toast = useToast();
+
+  useEffect(() => {
+    setLoggedUser(localStorage.getItem("logged_user"));
+  }, [trigger, location.state]);
+
+  const handleSignout = () => {
+    localStorage.removeItem("logged_user");
+    toast({
+      title: "Logged Out Successfully",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    setTrigger(!trigger);
+  };
+
   return (
     <>
       <div
@@ -81,8 +106,8 @@ function Navbar() {
         )}
         {width > 800 && (
           <div className="lower-part">
-            <div className="logo">
-              <Image
+            <div className="logo" onClick={() => navigate("/")}>
+              <img
                 src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg"
                 alt="logo"
                 width={150}
@@ -107,12 +132,20 @@ function Navbar() {
             <div className="options">
               <div className="parent-option">
                 <div className="child2">
-<<<<<<< HEAD
-                  <p style={{ display: "flex", alignItems: "center" }}>
+                  <p
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
                     <Menu>
-                      <MenuButton>Select your Pincode</MenuButton>
-                      <MenuList>
-                        <MenuItem>Choose your delivery location</MenuItem>
+                      <MenuButton
+                        style={{ fontSize: "14px", fontWeight: "bold" }}
+                      >
+                        Select your Pincode
+                      </MenuButton>
+                      {/* <MenuList>
+                        <h1 style={{color:"black"}}>Choose Your Delivery Location</h1>
                         <MenuItem>
                           <Input
                             placeholder="Enter Delivery Pincode"
@@ -126,25 +159,22 @@ function Navbar() {
                         <MenuItem as="a" href="#">
                           Detect My Location
                         </MenuItem>
-                      </MenuList>
+                      </MenuList> */}
                     </Menu>
                   </p>
                   <p>|</p>
-                  <p style={{ display: "flex", alignItems: "center" }}>
-=======
-                  <p>Select your Pin Code</p>
-                  <p
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderLeft: "1px solid white",
+                  <Link to={"/cart"}>
+                    <p style={{ display: "flex", alignItems: "center" }}>
+                      <IoCart style={{ fontSize: "x-large" }} />
+                      <p>Cart</p>
+                    </p>
+                  </Link>
+                  <Link
+                    to={!loggedUser ? "/login" : ""}
+                    onClick={() => {
+                      loggedUser ? handleSignout() : "";
                     }}
                   >
->>>>>>> ca8b74f50235169badfd0074e6e1ff8005931a3e
-                    <IoCart style={{ fontSize: "x-large" }} />
-                    <p>Cart</p>
-                  </p>
-                  <Link to="/login">
                     <p
                       style={{
                         display: "flex",
@@ -154,7 +184,7 @@ function Navbar() {
                     >
                       <IoPerson style={{ fontSize: "x-large" }} />
 
-                      <p>Login</p>
+                      <p>{loggedUser ? "Log Out" : "Login"}</p>
                     </p>
                   </Link>
                 </div>
@@ -182,9 +212,13 @@ function Navbar() {
                   />
                 </div>
                 <div className="options">
-                  <Button background={"transparent"} color={"white"}>
-                    <IoCart style={{ fontSize: "x-large", padding: "2%  " }} />
-                  </Button>
+                  <Link to={"/cart"}>
+                    <Button background={"transparent"} color={"white"}>
+                      <IoCart
+                        style={{ fontSize: "x-large", padding: "2%  " }}
+                      />
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <div className="bottom-lower">
@@ -216,7 +250,7 @@ function Navbar() {
                   fontWeight={"semibold"}
                   bgColor={"#e42529"}
                 >
-                  Login / Register
+                  {loggedUser ? loggedUser.split(" ")[0] : "Login/Register"}
                 </DrawerHeader>
 
                 <DrawerBody p={0} fontSize={"15px"}>
@@ -236,8 +270,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <FaMobileAlt />
-                      <Link to="">
-                        {" "}
+                      <Link to="/product" state={"Mobiles & Tablets"}>
                         <Text onClick={onClose}>Mobiles & Tablets</Text>
                       </Link>
                     </Flex>
@@ -255,7 +288,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <RiComputerLine />
-                      <Link to="">
+                      <Link to="/product" state={"Television"}>
                         <Text onClick={onClose}>Television</Text>
                       </Link>
                     </Flex>
@@ -273,7 +306,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <FaHeadphones />
-                      <Link to="">
+                      <Link to="/product" state={"Audio"}>
                         <Text onClick={onClose}>Audio</Text>
                       </Link>
                     </Flex>
@@ -291,7 +324,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <GiPlug />
-                      <Link to="">
+                      <Link to="/product" state={"Home Appliances"}>
                         <Text onClick={onClose}>Home Appliances</Text>
                       </Link>
                     </Flex>
@@ -309,7 +342,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <MdComputer />
-                      <Link to="">
+                      <Link to="/product" state={"Computer"}>
                         <Text onClick={onClose}>Computer</Text>
                       </Link>
                     </Flex>
@@ -327,7 +360,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <BsCameraFill />
-                      <Link to="">
+                      <Link to="/product" state={"Cameras"}>
                         <Text onClick={onClose}>Cameras</Text>
                       </Link>
                     </Flex>
@@ -345,7 +378,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <ImSpoonKnife />
-                      <Link to="">
+                      <Link to="/product" state={"Kitchen Appliances"}>
                         <Text onClick={onClose}>Kitchen Appliances</Text>
                       </Link>
                     </Flex>
@@ -363,7 +396,7 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <FaBath />
-                      <Link to="">
+                      <Link to="/product" state={"Personal Care"}>
                         <Text onClick={onClose}>Personal Care</Text>
                       </Link>
                     </Flex>
@@ -381,7 +414,9 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <FaUsb />
-                      <Text onClick={onClose}>Accessories</Text>
+                      <Link to="/product" state={"Accessories"}>
+                        <Text onClick={onClose}>Accessories</Text>
+                      </Link>
                     </Flex>
                     <GoPlus />
                   </Flex>
@@ -498,7 +533,15 @@ function Navbar() {
                   >
                     <Flex alignItems={"center"} gap="10px">
                       <MdAccountCircle />
-                      <Text onClick={onClose}>Login</Text>
+                      <Text
+                        onClick={() => {
+                          localStorage.removeItem("logged_user");
+                          onClose();
+                          setTrigger(!trigger);
+                        }}
+                      >
+                        {loggedUser ? "Log out" : "Login"}
+                      </Text>
                     </Flex>
                   </Flex>
                 </DrawerBody>
@@ -517,6 +560,10 @@ function Navbar() {
                         style={{
                           display: "flex",
                           padding: "0.5%",
+                        }}
+                        onMouseEnter={() => {
+                          setSelected(item);
+                          setToDisplay(true);
                         }}
                         onMouseOver={() => {
                           setSelected(item);
@@ -542,15 +589,19 @@ function Navbar() {
                   );
                 })
               : Object.keys(dropdownData)
-                  .slice(0, 5)
+                  .filter((_, index) => [1, 2, 4, 5, 8].includes(index))
                   .map((item) => {
                     return (
                       <>
-                        <Link to={"/product"}>
+                        <Link to={"/product"} state={item}>
                           <div
                             style={{
                               display: "flex",
                               padding: "0.5%",
+                            }}
+                            onMouseEnter={() => {
+                              setSelected(item);
+                              setToDisplay(true);
                             }}
                             onMouseOver={() => {
                               setSelected(item);
@@ -576,26 +627,62 @@ function Navbar() {
         )}
       </div>
       {toDisplay && (
-        <div className="parent-dropdown">
+        <div
+          className="parent-dropdown"
+          onMouseOver={() => setToDisplay(true)}
+          onMouseLeave={() => setToDisplay(false)}
+        >
           <div className="dropdown">
             <div className="drop-up">
               {dropdownData[selected].slice(1, 10).map((key) => {
-                return <div>{key}</div>;
+                return (
+                  <Link
+                    to="/product"
+                    state={selected}
+                    onClick={() => setToDisplay(false)}
+                  >
+                    <div onClick={() => setToDisplay(false)}>{key}</div>
+                  </Link>
+                );
               })}
             </div>
             <div className="drop-up">
               {dropdownData[selected].slice(11, 20).map((key) => {
-                return <div>{key}</div>;
+                return (
+                  <Link
+                    to="/product"
+                    state={selected}
+                    onClick={() => setToDisplay(false)}
+                  >
+                    <div>{key}</div>
+                  </Link>
+                );
               })}
             </div>
             <div className="drop-up">
               {dropdownData[selected].slice(21, 30).map((key) => {
-                return <div>{key}</div>;
+                return (
+                  <Link
+                    to="/product"
+                    state={selected}
+                    onClick={() => setToDisplay(false)}
+                  >
+                    <div>{key}</div>
+                  </Link>
+                );
               })}
             </div>
             <div className="drop-up">
               {dropdownData[selected].slice(31, 40).map((key) => {
-                return <div>{key}</div>;
+                return (
+                  <Link
+                    to="/product"
+                    state={selected}
+                    onClick={() => setToDisplay(false)}
+                  >
+                    <div>{key}</div>
+                  </Link>
+                );
               })}
             </div>
           </div>

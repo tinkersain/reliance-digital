@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css"; // Import CSS file for styling
+import "./Signup.css"; // Import CSS file for styling
 import {
   IconButton,
   Input,
@@ -9,16 +9,15 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { TbEye, TbEyeClosed } from "react-icons/tb";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const allUsers = JSON.parse(localStorage.getItem("allusers"));
+const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
   const toast = useToast();
-  const location = useLocation();
   const navigate = useNavigate();
 
   function isValidEmail(email) {
@@ -27,10 +26,10 @@ const Login = () => {
     return emailRegex.test(email);
   }
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
 
-    if (!email.length || !password.length) {
+    if (!email.length || !password.length || !name.length) {
       toast({
         title: "All Fields are Mandatory",
         description: "Please fill both email and password",
@@ -48,46 +47,45 @@ const Login = () => {
           isClosable: true,
         });
       } else {
-        console.log("i am here");
+        const allUsers = JSON.parse(localStorage.getItem("allusers"));
+        const newUser = {
+          name: name,
+          email: email,
+          password: password,
+        };
         if (!allUsers || allUsers.length === 0) {
+          localStorage.setItem("allusers", JSON.stringify([newUser]));
           toast({
-            title: "User does not exist",
-            description: "Please Create an Account first",
-            status: "warning",
+            title: "Sign up Successfull",
+            description: "We have logged you in.",
+            status: "success",
             duration: 3000,
             isClosable: true,
           });
+          navigate("/");
+          localStorage.setItem("logged_user", name);
         } else {
-          const user = allUsers.find((item) => item.email === email);
+          const existingUser = allUsers.find((user) => user.email === email);
           if (user) {
-            if (user.password === password) {
-              toast({
-                title: "Logged in Successfully",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              });
-              localStorage.setItem("logged_user", user.name);
-              location.state
-                ? navigate("/cart")
-                : navigate("/", { state: true });
-            } else {
-              toast({
-                title: "Wrong Password",
-                description: "Please Enter Correct Password",
-                status: "error",
-                duration: 3000,
-                isClosable: true,
-              });
-            }
-          } else {
             toast({
-              title: "User does not exist",
-              description: "Please Create an Account first",
+              title: "User Already Exist",
+              description: "Please Proceed to Login",
               status: "warning",
               duration: 3000,
               isClosable: true,
             });
+          } else {
+            allUsers.push(newUser);
+            localStorage.setItem("allusers", JSON.stringify(allUsers));
+            toast({
+              title: "Sign up Successfull",
+              description: "We have logged you in.",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+            navigate("/");
+            localStorage.setItem("logged_user", name);
           }
         }
       }
@@ -104,7 +102,16 @@ const Login = () => {
       </div>
       <div className="login-box">
         <h2>Login / Register</h2>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignup}>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Enter your Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div className="input-group">
             <input
               type="email"
@@ -137,10 +144,16 @@ const Login = () => {
             </InputGroup>
           </div>
           <Text>
-            Dont Have an account?{" "}
-            <Link to={"/signup"}>
-              <span style={{ color: "#e42929", textDecoration: "underline" }}>
-                Create one
+            Already have an account?
+            <Link to={"/login"}>
+              <span
+                style={{
+                  paddingLeft: "1%",
+                  color: "#e42929",
+                  textDecoration: "underline",
+                }}
+              >
+                Login Now
               </span>
             </Link>
           </Text>
@@ -148,9 +161,9 @@ const Login = () => {
             <button
               type="submit"
               className="login-button"
-              onClick={handleLogin}
+              onClick={handleSignup}
             >
-              LOGIN
+              Sign Up
             </button>
           </div>
         </form>
@@ -159,4 +172,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
