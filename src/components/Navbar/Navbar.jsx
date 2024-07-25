@@ -178,12 +178,7 @@ function Navbar() {
                       <p>Cart</p>
                     </p>
                   </Link>
-                  <Link
-                    to={!loggedUser ? "/login" : ""}
-                    onClick={() => {
-                      loggedUser ? handleSignout() : "";
-                    }}
-                  >
+                  <Link to={!loggedUser ? "/login" : "/ProfilePage"}>
                     <p
                       style={{
                         display: "flex",
@@ -193,7 +188,7 @@ function Navbar() {
                     >
                       <IoPerson style={{ fontSize: "x-large" }} />
 
-                      <p>{loggedUser ? "Log Out" : "Login"}</p>
+                      <p>{loggedUser ? `Hi ${loggedUser}` : "Login"}</p>
                     </p>
                   </Link>
                 </div>
