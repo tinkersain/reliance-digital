@@ -1,7 +1,7 @@
 // src/Sidebar.js
 
 import React from "react";
-import "./ProfilePage.css";
+import "./Sidebar.css";
 
 const Sidebar = () => {
   return (

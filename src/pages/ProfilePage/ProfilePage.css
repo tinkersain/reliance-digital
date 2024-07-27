@@ -4,46 +4,28 @@ body {
   background-color: #f4f4f9;
   font-family: "Arial", sans-serif;
 }
-
+.profile-container {
+  display: flex;
+}
 .profile-page {
-  max-width: 500px;
-  margin: 50px auto;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-}
-.sidebar {
-  width: 250px;
-  background: #2c3e50;
-  color: #ecf0f1;
-  height: 100vh;
-  padding: 20px;
-}
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+  width: 100%;
 }
-
-.sidebar ul li {
-  margin-bottom: 20px;
+.name-content {
+  display: flex;
+  width: 100%;
+  gap: 5%;
 }
-
-.sidebar ul li a {
-  color: #ecf0f1;
-  text-decoration: none;
-  font-size: 18px;
-  display: block;
-  padding: 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+.name-content > div:nth-child(1) {
+  width: 50%;
 }
-
-.sidebar ul li a:hover {
-  background-color: #34495e;
+.name-content > div:nth-child(2) {
+  width: 50%;
 }
-
 .profile-page h2 {
   text-align: center;
   color: #333;
@@ -116,4 +98,14 @@ body {
 
 .gender-group input[type="radio"] {
   margin-right: 5px;
+}
+@media (max-width: 800px) {
+  .name-content {
+    flex-direction: column;
+    gap: 0%;
+  }
+  .name-content > div:nth-child(1),
+  .name-content > div:nth-child(2) {
+    width: 100%;
+  }
 }
