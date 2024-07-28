@@ -16,6 +16,8 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState();
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -118,6 +120,15 @@ const Signup = () => {
               placeholder="Enter your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Enter your Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.substring(0, 10))}
               required
             />
           </div>
