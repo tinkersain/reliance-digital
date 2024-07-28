@@ -4,6 +4,7 @@ import React from "react";
 import "./Sidebar.css";
 import { IoMdClose } from "react-icons/io";
 import useWindowWidth from "../../components/useWindoWidth/useWindowWidth";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleOpen }) => {
   const width = useWindowWidth();
@@ -32,7 +33,7 @@ const Sidebar = ({ isOpen, toggleOpen }) => {
           <a href="#">My Address</a>
         </li>
         <li>
-          <a href="#">My Wishlist</a>
+          <Link to="/wishlist">My Wishlist</Link>
         </li>
         <li>
           <a href="#">ROne Loyalty Points</a>
