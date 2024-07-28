@@ -5,11 +5,15 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Radio,
+  RadioGroup,
+  Stack,
   Text,
   useToast,
 } from "@chakra-ui/react";
 import { TbEye, TbEyeClosed } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -28,19 +32,32 @@ const Signup = () => {
     return emailRegex.test(email);
   }
 
-  const handleSignup = (e) => {
-    e.preventDefault();
+  function isEmpty(data) {
+    for (const k in data) {
+      if (data[k].length === 0) return true;
+    }
+    return false;
+  }
 
-    if (!email.length || !password.length || !name.length) {
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const userData = {
+      name: name,
+      mobile: phone,
+      email: email,
+      password: password,
+      gender: gender,
+    };
+
+    if (isEmpty(userData)) {
       toast({
         title: "All Fields are Mandatory",
-        description: "Please fill both email and password",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
     } else {
-      if (!isValidEmail(email)) {
+      if (!isValidEmail(userData.email)) {
         toast({
           title: "Invalid Email",
           description: "Please Enter a valid email",
@@ -49,47 +66,26 @@ const Signup = () => {
           isClosable: true,
         });
       } else {
-        const allUsers = JSON.parse(localStorage.getItem("allusers"));
-        const newUser = {
-          name: name,
-          email: email,
-          password: password,
-        };
-        if (!allUsers || allUsers.length === 0) {
-          localStorage.setItem("allusers", JSON.stringify([newUser]));
-          toast({
-            title: "Sign up Successfull",
-            description: "We have logged you in.",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-          });
-          navigate("/", { state: true });
-          localStorage.setItem("logged_user", name);
-        } else {
-          const existingUser = allUsers.find((user) => user.email === email);
-          if (existingUser) {
+        await axios
+          .post("/signup", { userData })
+          .then((res) => {
             toast({
-              title: "User Already Exist",
-              description: "Please Proceed to Login",
-              status: "warning",
-              duration: 3000,
-              isClosable: true,
-            });
-          } else {
-            allUsers.push(newUser);
-            localStorage.setItem("allusers", JSON.stringify(allUsers));
-            toast({
-              title: "Sign up Successfull",
-              description: "We have logged you in.",
+              title: "Signup Successful",
+              description: "we'redirecting you to Homepage",
               status: "success",
               duration: 3000,
               isClosable: true,
             });
-            navigate("/");
-            localStorage.setItem("logged_user", name);
-          }
-        }
+          })
+          .catch((err) => {
+            console.log(err);
+            toast({
+              title: "Internal Server error",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          });
       }
     }
   };
@@ -116,19 +112,19 @@ const Signup = () => {
           </div>
           <div className="input-group">
             <input
-              type="email"
-              placeholder="Enter your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter your Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.substring(0, 10))}
               required
             />
           </div>
           <div className="input-group">
             <input
-              type="text"
-              placeholder="Enter your Mobile Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value.substring(0, 10))}
+              type="email"
+              placeholder="Enter your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -153,6 +149,14 @@ const Signup = () => {
                 />
               </InputRightElement>
             </InputGroup>
+          </div>
+          <div className="input-group">
+            <RadioGroup onChange={setGender} value={gender}>
+              <Stack direction="row">
+                <Radio value="Male">Male</Radio>
+                <Radio value="Female">Female</Radio>
+              </Stack>
+            </RadioGroup>
           </div>
           <Text>
             Already have an account?
