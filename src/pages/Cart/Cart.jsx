@@ -2,14 +2,44 @@ import React, { useEffect, useState } from "react";
 import "./Cart.css";
 import { FaPlus } from "react-icons/fa";
 import { Box, Button, Image, Text, useToast } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import PulseLoader from "../../components/PulseLoader/PulseLoader";
+import axios from "axios";
+import PlaceOrder from "../../components/PlaceOrder/PlaceOrder";
 
-const CartItem = ({ product, index, handleCartRemove }) => {
-  const { name, img, price, mrp, discount, id } = product;
+const CartItem = ({ product, handleCartRemove, trigger, setTrigger }) => {
+  const userId = JSON.parse(localStorage.getItem("logged_user"))._id;
+  const { name, img, price, mrp, discount, _id } = product;
+  const toast = useToast();
+
+  async function handleAddtoWishlist() {
+    await axios
+      .post(`/addtowishlist/${userId}`, { product })
+      .then((res) => {
+        toast({
+          title: "Item Moved to Wishlist.",
+          description: "We added this item in your wishlist.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setTrigger(!trigger);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "Internal Server Error",
+          description: "Something Went Wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
+  }
 
   return (
     <div>
-      <div key={id} className="cart-info-box">
+      <div key={_id} className="cart-info-box">
         <div className="product-box">
           <div>
             <img src={img} alt="Product images" className="cart-image" />
@@ -35,7 +65,7 @@ const CartItem = ({ product, index, handleCartRemove }) => {
                 width="24px"
                 alt="truck"
               />
-              Delivere by: 22-22-2222
+              Delivery by: 05-08-2024
             </h2>
             <h2 id="govt-assurance">
               *Delivery assurance is subject to our delivery locations staying
@@ -44,9 +74,12 @@ const CartItem = ({ product, index, handleCartRemove }) => {
           </div>
         </div>
         <div className="cart-buttons">
-          <button onClick={() => handleCartRemove(index)}>Remove</button>
+          <button onClick={() => handleCartRemove(_id)}>Remove</button>
 
-          <button> Move to wishlist </button>
+          <button onClick={() => handleAddtoWishlist()}>
+            {" "}
+            Move to wishlist{" "}
+          </button>
         </div>
       </div>
     </div>
@@ -83,28 +116,71 @@ const EmptyCart = () => {
 };
 
 function Cart() {
+  const user = JSON.parse(localStorage.getItem("logged_user"));
   const toast = useToast();
-  const [data, setData] = useState(JSON.parse(localStorage.getItem("cart")));
+  const [data, setData] = useState(null);
   const [trigger, setTrigger] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [toOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    setData(JSON.parse(localStorage.getItem("cart")));
-    console.log("new");
+    // Function to fetch data from backend
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await axios
+          .post("/cartdata", { id: user._id })
+          .then((res) => {
+            setData(res.data);
+            setLoading(false);
+          })
+          .catch((err) => console.log(err));
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [trigger]);
 
-  const handleCartRemove = async (index) => {
-    console.log(index);
-    setData(data.splice(index, 1));
-    localStorage.setItem("cart", JSON.stringify(data));
-    setTrigger(!trigger);
+  if (loading) {
+    return <PulseLoader />;
+  }
+
+  if (!user) {
     toast({
-      title: "Item Removed",
-      description: "We've removed the item from your cart.",
-      status: "success",
+      title: "Please Login first to continue",
+      status: "warning",
       duration: 3000,
       isClosable: true,
     });
+    return <Navigate to={"/"} />;
+  }
+
+  const handleCartRemove = async (id) => {
+    await axios
+      .post("/removeCartItem", { uid: user._id, iid: id })
+      .then((res) => {
+        toast({
+          title: "Item Removed",
+          description: "We've removed the item from your cart.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setTrigger(!trigger);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          title: "something went wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      });
   };
 
   function calculateTotalPrice() {
@@ -115,28 +191,6 @@ function Cart() {
     }
     return total;
   }
-
-  const handlePlaceOrder = () => {
-    const login = localStorage.getItem("logged_user");
-    if (!login) {
-      toast({
-        title: "Please Login first to continue",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
-      });
-      navigate("/login", { state: true });
-    } else {
-      toast({
-        title: "Order Successfully Placed",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
-      localStorage.setItem("cart", JSON.stringify([]));
-      setTrigger(!trigger);
-    }
-  };
 
   return (
     <>
@@ -149,13 +203,15 @@ function Cart() {
                   product={product}
                   index={index}
                   handleCartRemove={handleCartRemove}
+                  trigger={trigger}
+                  setTrigger={setTrigger}
                 />
               );
             })}
           </div>
           <div className="payment-checkout">
-            <button id="checkout-btn" onClick={handlePlaceOrder}>
-              Place Order{" "}
+            <button id="checkout-btn" onClick={() => setOpen(true)}>
+              Place Order
             </button>
             <div className="amount">
               <div id="coupon">
@@ -171,7 +227,7 @@ function Cart() {
                 </div>
                 <div>
                   <h4>Delivery Charges</h4>
-                  <h4> {0.01 * calculateTotalPrice()}</h4>
+                  <h4> {(0.01 * calculateTotalPrice()).toFixed(2)}</h4>
                 </div>
                 <hr />
                 <div className="payment">
@@ -188,6 +244,17 @@ function Cart() {
       ) : (
         <EmptyCart />
       )}
+
+      <PlaceOrder
+        trigger={trigger}
+        setTrigger={setTrigger}
+        toOpen={toOpen}
+        setOpen={setOpen}
+        amount={(calculateTotalPrice() + 0.01 * calculateTotalPrice()).toFixed(
+          2
+        )}
+        data={data}
+      />
     </>
   );
 }

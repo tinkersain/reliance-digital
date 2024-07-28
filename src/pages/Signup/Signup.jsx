@@ -69,22 +69,35 @@ const Signup = () => {
         await axios
           .post("/signup", { userData })
           .then((res) => {
+            console.log(res.data);
             toast({
               title: "Signup Successful",
-              description: "we'redirecting you to Homepage",
+              description: "We're redirecting you to Homepage",
               status: "success",
               duration: 3000,
               isClosable: true,
             });
+            localStorage.setItem("logged_user", JSON.stringify(res.data.data));
+            navigate("/");
           })
           .catch((err) => {
             console.log(err);
-            toast({
-              title: "Internal Server error",
-              status: "error",
-              duration: 3000,
-              isClosable: true,
-            });
+            if (err.response.status == 400) {
+              toast({
+                title: "User Already Exists",
+                description: "Please Try Signup using different Email",
+                status: "warning",
+                duration: 3000,
+                isClosable: true,
+              });
+            } else {
+              toast({
+                title: "Internal Server error",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+              });
+            }
           });
       }
     }
