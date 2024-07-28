@@ -9,7 +9,6 @@ import ProductInfo from "./pages/ProductInfo/ProductInfo";
 import Cart from "./pages/Cart/Cart";
 import Signup from "./pages/Signup/Signup";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import WishlistPage from "./pages/WishlistPage/WishlistPage";
 import Demo from "./components/page";
 import axios from "axios";
 axios.defaults.baseURL = "http://localhost:8080";
@@ -27,7 +26,6 @@ export default function App() {
           <Route path="/productDetails" element={<ProductInfo />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
-          <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/page" element={<Demo />} />
         </Routes>
       </BrowserRouter>

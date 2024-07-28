@@ -65,7 +65,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [loggedUser, setLoggedUser] = useState(
-    localStorage.getItem("logged_user")
+    JSON.parse(localStorage.getItem("logged_user"))
   );
   const [selected, setSelected] = useState("Mobiles & Tablets");
   const [toDisplay, setToDisplay] = useState(false);
@@ -76,7 +76,7 @@ function Navbar() {
   const toast = useToast();
 
   useEffect(() => {
-    setLoggedUser(localStorage.getItem("logged_user"));
+    setLoggedUser(JSON.parse(localStorage.getItem("logged_user")));
   }, [trigger, location]);
 
   const handleSignout = () => {
@@ -188,7 +188,11 @@ function Navbar() {
                     >
                       <IoPerson style={{ fontSize: "x-large" }} />
 
-                      <p>{loggedUser ? `Hi ${loggedUser}` : "Login"}</p>
+                      <p>
+                        {loggedUser
+                          ? `Hi ${loggedUser.name.split(" ")[0]}`
+                          : "Login"}
+                      </p>
                     </p>
                   </Link>
                 </div>
@@ -254,7 +258,9 @@ function Navbar() {
                   fontWeight={"semibold"}
                   bgColor={"#e42529"}
                 >
-                  {loggedUser ? loggedUser.split(" ")[0] : "Login/Register"}
+                  {loggedUser
+                    ? loggedUser.name.split(" ")[0]
+                    : "Login/Register"}
                 </DrawerHeader>
 
                 <DrawerBody p={0} fontSize={"15px"}>

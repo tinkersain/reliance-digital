@@ -11,8 +11,10 @@ import {
 import React, { useEffect, useState } from "react";
 import styleProduct from "./prod.module.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ProductInfo = () => {
+  const user = JSON.parse(localStorage.getItem("logged_user"));
   const navigate = useNavigate();
   const location = useLocation();
   if (!location.state) {
@@ -20,26 +22,42 @@ const ProductInfo = () => {
   }
   const toast = useToast();
   const data = location.state;
-  console.log("i am here", data);
 
-  const handleAddtoCart = (toNaviagte) => {
-    const before = JSON.parse(localStorage.getItem("cart"));
-    if (!before) {
-      localStorage.setItem("cart", JSON.stringify([data]));
+  const handleAddtoCart = async (toNaviagte) => {
+    if (!user) {
+      toast({
+        title: "Please Login First",
+        description: "Please Login to start adding in your cart",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      navigate("/login", { state: "/productDetails" });
     } else {
-      before.push(data);
-      localStorage.setItem("cart", JSON.stringify(before));
+      console.log(data);
+      await axios
+        .post(`/addtocart/${user._id}`, { data })
+        .then((res) => {
+          toast({
+            title: "Item Added to Cart.",
+            description: "We added this item in your cart.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast({
+            title: "Internal Server Error",
+            description: "Something Went Wrong",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        });
+      toNaviagte ? navigate("/cart") : "";
     }
-
-    toast({
-      title: "Item Added to Cart.",
-      description: "We added this item in your cart.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-
-    toNaviagte ? navigate("/cart") : "";
   };
 
   return (

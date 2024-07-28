@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { TbEye, TbEyeClosed } from "react-icons/tb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
-  const allUsers = JSON.parse(localStorage.getItem("allusers"));
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -21,13 +21,15 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  console.log(location.state);
+
   function isValidEmail(email) {
     // Regular expression to validate an email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!email.length || !password.length) {
@@ -48,48 +50,48 @@ const Login = () => {
           isClosable: true,
         });
       } else {
-        console.log("i am here");
-        if (!allUsers || allUsers.length === 0) {
-          toast({
-            title: "User does not exist",
-            description: "Please Create an Account first",
-            status: "warning",
-            duration: 3000,
-            isClosable: true,
-          });
-        } else {
-          const user = allUsers.find((item) => item.email === email);
-          if (user) {
-            if (user.password === password) {
+        const sendData = { email, password };
+        await axios
+          .post("/login", { sendData })
+          .then((res) => {
+            const userData = res.data.data;
+            localStorage.setItem("logged_user", JSON.stringify(userData));
+            toast({
+              title: "Signin Successfull",
+              description: "We're redirecting you...",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+            location.state !== null ? navigate(-1) : navigate("/");
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status === 404) {
               toast({
-                title: "Logged in Successfully",
-                status: "success",
+                title: "User Does not exist",
+                status: "error",
                 duration: 3000,
                 isClosable: true,
               });
-              localStorage.setItem("logged_user", user.name);
-              location.state
-                ? navigate("/cart")
-                : navigate("/", { state: true });
+            } else if (err.response.status === 400) {
+              toast({
+                title: "Invalid Password",
+                description: "Please Enter correct password",
+                status: "warning",
+                duration: 3000,
+                isClosable: true,
+              });
             } else {
               toast({
-                title: "Wrong Password",
-                description: "Please Enter Correct Password",
+                title: "Internal Server Error",
+                description: "Something went wrong!",
                 status: "error",
                 duration: 3000,
                 isClosable: true,
               });
             }
-          } else {
-            toast({
-              title: "User does not exist",
-              description: "Please Create an Account first",
-              status: "warning",
-              duration: 3000,
-              isClosable: true,
-            });
-          }
-        }
+          });
       }
     }
   };
