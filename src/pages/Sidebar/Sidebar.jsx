@@ -2,11 +2,23 @@
 
 import React from "react";
 import "./Sidebar.css";
+import { IoMdClose } from "react-icons/io";
+import useWindowWidth from "../../components/useWindoWidth/useWindowWidth";
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, toggleOpen }) => {
+  const width = useWindowWidth();
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ display: `${isOpen ? "" : "none"}` }}>
       <ul>
+        <li
+          style={{
+            float: "right",
+            display: `${width <= 800 ? "" : "none"}`,
+          }}
+          onClick={() => toggleOpen(!isOpen)}
+        >
+          <IoMdClose style={{ fontSize: "x-large", fontWeight: "800" }} />
+        </li>
         <li>
           <a href="#">My Account</a>
         </li>

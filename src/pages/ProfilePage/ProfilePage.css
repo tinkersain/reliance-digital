@@ -1,9 +1,5 @@
 /* src/ProfilePage.css */
 
-body {
-  background-color: #f4f4f9;
-  font-family: "Arial", sans-serif;
-}
 .profile-container {
   display: flex;
 }
