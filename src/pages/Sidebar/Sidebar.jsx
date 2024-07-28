@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./Sidebar.css";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -20,7 +21,7 @@ const Sidebar = () => {
           <a href="#">My Address</a>
         </li>
         <li>
-          <a href="#">My Wishlist</a>
+          <Link to="/wishlist">My Wishlist</Link>
         </li>
         <li>
           <a href="#">ROne Loyalty Points</a>
