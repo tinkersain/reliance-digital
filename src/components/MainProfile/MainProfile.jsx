@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useWindowWidth from "../useWindoWidth/useWindowWidth";
 import { Radio, RadioGroup, Stack, useToast } from "@chakra-ui/react";
+import axios from "axios";
 
 function MainProfile() {
   const width = useWindowWidth();
