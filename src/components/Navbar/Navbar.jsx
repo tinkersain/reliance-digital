@@ -213,11 +213,13 @@ function Navbar() {
                   </Button>
                 </div>
                 <div className="logo">
-                  <Image
-                    src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg"
-                    alt="logo"
-                    width={150}
-                  />
+                  <Link to="/">
+                    <Image
+                      src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg"
+                      alt="logo"
+                      width={150}
+                    />
+                  </Link>
                 </div>
                 <div className="options">
                   <Link to={"/cart"}>
@@ -258,9 +260,11 @@ function Navbar() {
                   fontWeight={"semibold"}
                   bgColor={"#e42529"}
                 >
-                  {loggedUser
-                    ? loggedUser.name.split(" ")[0]
-                    : "Login/Register"}
+                  <Link to={loggedUser ? "/ProfilePage" : ""} onClick={onClose}>
+                    {loggedUser
+                      ? loggedUser.name.split(" ")[0]
+                      : "Login/Register"}
+                  </Link>
                 </DrawerHeader>
 
                 <DrawerBody p={0} fontSize={"15px"}>
