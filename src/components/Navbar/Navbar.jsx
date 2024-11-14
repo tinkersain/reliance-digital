@@ -260,7 +260,10 @@ function Navbar() {
                   fontWeight={"semibold"}
                   bgColor={"#e42529"}
                 >
-                  <Link to={loggedUser ? "/ProfilePage" : ""} onClick={onClose}>
+                  <Link
+                    to={loggedUser ? "/ProfilePage" : "/login"}
+                    onClick={onClose}
+                  >
                     {loggedUser
                       ? loggedUser.name.split(" ")[0]
                       : "Login/Register"}
