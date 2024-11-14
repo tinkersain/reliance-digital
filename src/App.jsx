@@ -11,7 +11,7 @@ import Signup from "./pages/Signup/Signup";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import Demo from "./components/page";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://reliance-digital-backend-five.vercel.app";
 
 export default function App() {
   return (
