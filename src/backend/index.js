@@ -1,18 +1,17 @@
-require("dotenv").config();
-
 const express = require("express");
 const cors = require("cors");
-const Razorpay = require("razorpay");
-const fs = require("fs");
-const bcrypt = require("bcryptjs");
 const { mongoose } = require("mongoose");
+require("dotenv").config();
+const bcrypt = require("bcryptjs");
+const { error } = require("console");
+const MONGO_URL = process.env.MONGO_URL;
+const PUBLIC_URL = process.env.PUBLIC_URL;
+const PORT = 8080;
+const Razorpay = require("razorpay");
 const UserModel = require("./Schema/UserModel");
 const CartModel = require("./Schema/Cart");
 const WishlistModel = require("./Schema/Wishlist");
 const OrderModel = require("./Schema/Orders");
-const PORT = process.env.PORT || 3000;
-const PUBLIC_URL = process.env.PUBLIC_URL;
-const MONGO_URL = process.env.MONGO_URL;
 
 const app = express();
 app.use(express.json());
@@ -24,7 +23,6 @@ app.use(
     credentials: true,
   })
 );
-app.options("*", cors());
 
 // Function to hash a password
 async function hashPassword(plainTextPassword) {
@@ -49,6 +47,8 @@ async function verifyPassword(plainTextPassword, hashedPassword) {
     throw error;
   }
 }
+
+mongoose.set("strictQuery", true);
 
 //Define the route
 app.get("/", async (req, res) => {
